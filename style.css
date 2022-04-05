@@ -38,6 +38,7 @@ nav{
     height: 70px;
     width: 100%;
     background-color: var(--nav-color);
+    z-index: 100;
 }
 nav .nav-bar{
     position: relative;
@@ -109,7 +110,7 @@ nav .nav-bar .logo a::before{
 }
 
 .darkLight-searchBox .dark-light,
-.darkLight-searchBox .searchBox{
+.darkLight-searchBox .searchToggle{
     height: 40px;
     width: 40px;
     display: flex;
@@ -119,7 +120,7 @@ nav .nav-bar .logo a::before{
 }
 
 .dark-light i,
-.searchBox i{
+.searchToggle i{
     position: absolute;
     color: var(--text-color);
     font-size: 22px;
@@ -142,7 +143,113 @@ nav .nav-bar .logo a::before{
     pointer-events: none;
 }
 
-.searchBox i.cancel{
+.searchToggle i.cancel{
     opacity: 0;
     pointer-events: none;
 }
+
+.searchToggle.active i.cancel{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.searchToggle.active i.search{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.searchBox{
+    position: relative;
+}
+.searchBox .search-field{
+    position: absolute;
+    bottom: -85px;
+    right: 5px;
+    height: 50px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    background-color: var(--nav-color);
+    padding: 3px;
+    border-radius: 6px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.searchToggle.active ~ .search-field{
+    bottom: -74px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.search-field::before{
+    content: '';
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    background-color: var(--nav-color);
+    right: 14px;
+    top: -4px;
+    transform: rotate(-45deg);
+    z-index: -1;
+}
+
+.search-field input{
+    height: 100%;
+    width: 100%;
+    padding: 0 45px 0 15px;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    color: var(--search-text);
+    font-size: 14px;
+    font-weight: 400;
+    background-color: var(--search-bar);
+}
+.search-field i{
+    position: absolute;
+    color: var(--nav-color);
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+
+@media (max-width: 790px) {
+    .menu{
+        position: fixed;
+        height: 100%;
+        width: 320px;
+        left: 0;
+        top: 0;
+        padding: 20px;
+        background-color: var(--side-nav);
+        z-index: 100;
+    }
+    .menu .logo-toggle{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo-toggle .siderbarClose{
+        color: var(--text-color);
+        font-size: 24px;
+        cursor: pointer;
+    }
+    .nav-bar .nav-links{
+        flex-direction: column;
+        padding-top: 30px;
+    }
+    .nav-links li a{
+        display: block;
+        margin-top: 20px;
+    }
+
+}
+
+
+
